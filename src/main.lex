@@ -89,13 +89,27 @@ AERROR .
 }
 {IF} {
 	TreeNode* node = new TreeNode(lineno, NODE_STMT);
-	node->stype = STMT_CONDI;
+	node->stype = STMT_IF;
 	node->stmt_val="if";
 	yylval = node;
 	return RETURN；
 }
-{ELSE} {std::cout<<"ELSE"<<"\t"<<yytext<<std::endl;}
-{WHILE} {std::cout<<"WHILE"<<"\t"<<yytext<<std::endl;}
+{ELSE} {
+	TreeNode* node = new TreeNode(lineno, NODE_STMT);
+	node->stype = STMT_ELSE;
+	node->stmt_val="else";
+	yylval = node;
+	return RETURN；
+
+}
+{WHILE} {
+	TreeNode* node = new TreeNode(lineno, NODE_STMT);
+	node->stype = STMT_WHILE;
+	node->stmt_val="else";
+	yylval = node;
+	return RETURN；
+
+}
 {PLUASS} {std::cout<<"PLUASS"<<"\t"<<yytext<<std::endl;}
 {MINASS} {std::cout<<"MINASS"<<"\t"<<yytext<<std::endl;}
 {MULASS} {std::cout<<"MULASS"<<"\t"<<yytext<<std::endl;}

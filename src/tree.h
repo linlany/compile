@@ -24,6 +24,9 @@ enum StmtType {
     STMT_SKIP,
     STMT_DECL,
     STMT_CONDI,
+    STMT_IF,
+    STMT_ELSE,
+    STMT_WHILE,
 }
 ;
 
