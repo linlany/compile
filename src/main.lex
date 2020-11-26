@@ -14,6 +14,8 @@ RETURN return
 IF if
 ELSE else
 WHILE while
+FOR for
+
 PLUASS \+=
 MINASS -=
 MULASS \*=
@@ -21,18 +23,24 @@ DIVASS \/=
 PLUS \+
 MINUS -
 INTEGER [1-9]+[0-9]*|0 
-FLOAT   [0-9]+\.[0-9]*  
+
 ID [a-z_A-Z][a-zA-Z_0-9]*
 SPACE [ \t]*
 SEMI ;
 COMMA ,
 ASSIGN =
-RELOP >|<|>=|<=|==|!=
+LOEOP <=
+GOEOP >=
+GREOP >
+LESSOP <
+EQOP ==
+NEQOP !=
+
 MUL \*
 DIV \/
+MOD %
 AND &&
 OR \|\|
-DOT \.
 NOT !
 LPAREN \(
 RPAREN \)
@@ -47,6 +55,8 @@ sincombegin \/\/
 sincomele .
 sincomend \n
 
+PRINTF printf
+SCANF scanf
 AERROR .
 %x COMMENT
 %x SINCOMMENT
@@ -82,7 +92,7 @@ AERROR .
 
 {RETURN} {
 	TreeNode* node = new TreeNode(lineno, NODE_STMT);
-	node->stype = STMT_SKIP;
+	node->stype = STMT_RETURN;
 	node->stmt_val="return";
 	yylval = node;
 	return RETURN；
@@ -92,30 +102,70 @@ AERROR .
 	node->stype = STMT_IF;
 	node->stmt_val="if";
 	yylval = node;
-	return RETURN；
+	return IF；
 }
 {ELSE} {
 	TreeNode* node = new TreeNode(lineno, NODE_STMT);
 	node->stype = STMT_ELSE;
 	node->stmt_val="else";
 	yylval = node;
-	return RETURN；
+	return ELSE；
 
 }
 {WHILE} {
 	TreeNode* node = new TreeNode(lineno, NODE_STMT);
 	node->stype = STMT_WHILE;
-	node->stmt_val="else";
+	node->stmt_val="while";
 	yylval = node;
-	return RETURN；
+	return WHILE；
 
 }
-{PLUASS} {std::cout<<"PLUASS"<<"\t"<<yytext<<std::endl;}
-{MINASS} {std::cout<<"MINASS"<<"\t"<<yytext<<std::endl;}
-{MULASS} {std::cout<<"MULASS"<<"\t"<<yytext<<std::endl;}
-{DIVASS} {std::cout<<"DIVASS"<<"\t"<<yytext<<std::endl;}
-{PLUS} {std::cout<<"PLUS"<<"\t"<<yytext<<std::endl;}
-{MINUS} {std::cout<<"MINUS"<<"\t"<<yytext<<std::endl;}
+{FOR} {
+	TreeNode* node = new TreeNode(lineno, NODE_STMT);
+	node->stype = STMT_FOR;
+	node->stmt_val="for";
+	yylval = node;
+	return FOR；
+
+}
+{PLUASS} {
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_PLU_ASS;
+	yylval = node;
+	return PLUASS；
+
+}
+{MINASS} {
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_MIN_ASS;
+	yylval = node;
+	return MINASS；
+
+}
+{MULASS} {	
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_MUL_ASS;
+	yylval = node;
+	return MULASS；
+	}
+{DIVASS} {
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_DIV_ASS;
+	yylval = node;
+	return DIVASS；
+}
+{PLUS} {
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_PLUSS;
+	yylval = node;
+	return PLUS；
+}
+{MINUS} {
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_MINUS;
+	yylval = node;
+	return MINUS；
+}
 {INTEGER} {
     TreeNode* node = new TreeNode(lineno, NODE_CONST);
     node->type = TYPE_INT;
@@ -124,32 +174,125 @@ AERROR .
     return INTEGER;
 }
 
-{FLOAT} {std::cout<<"FLOAT"<<"\t"<<yytext<<"\t"<<atof(yytext)<<std::endl;}
+
 {ID} {
     TreeNode* node = new TreeNode(lineno, NODE_VAR);
     node->var_name = string(yytext);
     yylval = node;
-    return IDENTIFIER;
+    return ID;
 }
 {SPACE} {}
-{SEMI} {std::cout<<"SEMI"<<"\t"<<yytext<<std::endl;}
-{COMMA} {std::cout<<"COMMA"<<"\t"<<yytext<<std::endl;}
-{ASSIGN} {std::cout<<"ASSIGN"<<"\t"<<yytext<<std::endl;}
-{RELOP} {std::cout<<"RELOP"<<"\t"<<yytext<<std::endl;}
-{MUL} {std::cout<<"MUL"<<"\t"<<yytext<<std::endl;}
-{DIV} {std::cout<<"DIV"<<"\t"<<yytext<<std::endl;}
-{AND} {std::cout<<"AND"<<"\t"<<yytext<<std::endl;}
-{OR} {std::cout<<"OR"<<"\t"<<yytext<<std::endl;}
-{DOT} {std::cout<<"DOT"<<"\t"<<yytext<<std::endl;}
+{SEMI} {
+	return SEMI;
+}
+{COMMA} {return COMMA;}
+{ASSIGN} {
+	TreeNode* node = new TreeNode(lineno, NODE_STMT);
+	node->stype = STMT_ASSIGN;
+	node->stmt_val="=";
+	yylval = node;
+	return ASSIGN；
+}
+{LOEOP} {	
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_LOE;
+	yylval = node;
+	return LOEOP；
+}
+{GOEOP} {	
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_GOE;
+	yylval = node;
+	return GOEOP；
+}
+{GREOP} {	
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_GRE;
+	yylval = node;
+	return GREOP；
+}
+{LESSOP} {	
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_LESS;
+	yylval = node;
+	return LESSOP；
+}
+{EQOP} {	
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_EQ;
+	yylval = node;
+	return EQOP；
+}
+{NEQOP} {	
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_NEQ;
+	yylval = node;
+	return NEQOP；
+}
+{MUL} {
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_MUL;
+	yylval = node;
+	return MUL；
 
-{NOT} {std::cout<<"NOT"<<"\t"<<yytext<<std::endl;}
-{LPAREN} {std::cout<<"LPAREN"<<"\t"<<yytext<<std::endl;}
-{RPAREN} {std::cout<<"RPAREN"<<"\t"<<yytext<<std::endl;}
-{LBRACK} {std::cout<<"LBRACK"<<"\t"<<yytext<<std::endl;}
-{RBRACK} {std::cout<<"RBRACK"<<"\t"<<yytext<<std::endl;}
-{LBRACE} {std::cout<<"LBRACE"<<"\t"<<yytext<<std::endl;table* temp=curt;curt=new table(temp);}
-{RBRACE} {std::cout<<"RBRACE"<<"\t"<<yytext<<std::endl;table* temp=curt;curt=temp->pre;}
+}
+{DIV} {
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_DIV;
+	yylval = node;
+	return DIV；
 
+}
+{MOD} {
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_MOD;
+	yylval = node;
+	return MOD；
+
+}
+{AND} {
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_AND;
+	yylval = node;
+	return AND；
+
+}
+{OR} {
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_OR;
+	yylval = node;
+	return OR；
+
+}
+
+
+{NOT} {
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_NOT;
+	yylval = node;
+	return NOT；
+
+}
+{LPAREN} {return LPAREN;}
+{RPAREN} {return RPAREN;}
+{LBRACK} {return LBRACK;}
+{RBRACK} {return RBRACK;}
+{LBRACE} {return LBRACE;}
+{RBRACE} {return RBRACE;}
+{PRINTF} {
+	TreeNode* node = new TreeNode(lineno, NODE_STMT);
+	node->stype = STMT_PRINTF;
+	node->stmt_val="printf";
+	yylval = node;
+	return PRINTF；
+}
+{SCANF} {
+	TreeNode* node = new TreeNode(lineno, NODE_STMT);
+	node->stype = STMT_SCANF;
+	node->stmt_val="scanf";
+	yylval = node;
+	return SCANF；
+}
 {commentbegin} {BEGIN COMMENT;}
 <COMMENT>{commentelement} {}
 <COMMENT>{commentend} {BEGIN INITIAL;}

@@ -18,6 +18,23 @@ enum NodeType
 enum OperatorType
 {
     OP_EQ,  // ==
+    OP_PLU_ASS,
+    OP_MIN_ASS,
+    OP_MUL_ASS,
+    OP_DIV_ASS,
+    OP_PLUSS,
+    OP_MINUS,
+    OP_GRE,
+    OP_LESS,
+    OP_GOE,//>=
+    OP_LOE,//<=
+    OP_NEQ,//!=
+    OP_MUL,
+    OP_DIV,
+    OP_AND,
+    OP_OR,
+    OP_NOT,
+    OP_MOD,
 };
 
 enum StmtType {
@@ -27,6 +44,11 @@ enum StmtType {
     STMT_IF,
     STMT_ELSE,
     STMT_WHILE,
+    STMT_RETURN,
+    STMT_FOR,
+    STMT_ASSIGN,
+    STMT_PRINTF,
+    STMT_SCANF,
 }
 ;
 
