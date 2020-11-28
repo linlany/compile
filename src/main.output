@@ -1,0 +1,1972 @@
+终端机在文法中未使用
+
+    T_STRING
+    PLUASS
+    MINASS
+    MULASS
+    DIVASS
+    LBRACK
+    RBRACK
+    BOOL
+
+
+语法
+
+    0 $accept: program $end
+
+    1 program: T ID LPAREN RPAREN statements
+
+    2 statements: statement
+    3           | statements statement
+
+    4 statement: SEMI
+    5          | declaration SEMI
+    6          | RETURN expr SEMI
+    7          | IF LPAREN expr RPAREN statement ELSE statement
+    8          | IF LPAREN expr RPAREN statement
+    9          | WHILE LPAREN expr RPAREN statement
+   10          | forstmt
+   11          | PRINTF LPAREN expr RPAREN SEMI
+   12          | SCANF LPAREN ID RPAREN SEMI
+   13          | lb statements rb
+   14          | exprstmt
+   15          | lb rb
+
+   16 forstmt: FOR LPAREN statement statement exprassign RPAREN statement
+   17        | FOR LPAREN statement statement RPAREN statement
+
+   18 exprstmt: expr SEMI
+
+   19 lb: LBRACE
+
+   20 rb: RBRACE
+
+   21 declaration: T ID ASSIGN expr
+   22            | T idlist
+
+   23 idlist: idlist COMMA ID
+   24       | ID
+
+   25 expr: ID
+   26     | INTEGER
+   27     | CHAR
+   28     | STRING
+   29     | expr PLUS expr
+   30     | expr MINUS expr
+   31     | expr MUL expr
+   32     | expr DIV expr
+   33     | expr MOD expr
+   34     | boolexpr
+   35     | exprassign
+   36     | MINUS expr
+   37     | PLUS expr
+   38     | expr LOEOP expr
+   39     | expr GOEOP expr
+   40     | expr LESSOP expr
+   41     | expr GREOP expr
+   42     | expr EQOP expr
+   43     | expr NEQOP expr
+
+   44 boolexpr: expr AND expr
+   45         | expr OR expr
+   46         | NOT expr
+
+   47 exprassign: ID ASSIGN expr
+
+   48 T: T_INT
+   49  | T_CHAR
+   50  | T_BOOL
+   51  | T_VOID
+
+
+终结语词，附有它们出现处的规则
+
+    $end (0) 0
+    error (256)
+    T_CHAR (258) 49
+    T_INT (259) 48
+    T_STRING (260)
+    T_BOOL (261) 50
+    T_VOID (262) 51
+    RETURN (263) 6
+    IF (264) 7 8
+    ELSE (265) 7
+    WHILE (266) 9
+    FOR (267) 16 17
+    PLUASS (268)
+    MINASS (269)
+    MULASS (270)
+    DIVASS (271)
+    PLUS (272) 29 37
+    MINUS (273) 30 36
+    SEMI (274) 4 5 6 11 12 18
+    COMMA (275) 23
+    ASSIGN (276) 21 47
+    LOEOP (277) 38
+    GOEOP (278) 39
+    GREOP (279) 41
+    LESSOP (280) 40
+    EQOP (281) 42
+    NEQOP (282) 43
+    MUL (283) 31
+    DIV (284) 32
+    MOD (285) 33
+    AND (286) 44
+    OR (287) 45
+    NOT (288) 46
+    LPAREN (289) 1 7 8 9 11 12 16 17
+    RPAREN (290) 1 7 8 9 11 12 16 17
+    LBRACK (291)
+    RBRACK (292)
+    LBRACE (293) 19
+    RBRACE (294) 20
+    PRINTF (295) 11
+    SCANF (296) 12
+    ID (297) 1 12 21 23 24 25 47
+    INTEGER (298) 26
+    CHAR (299) 27
+    BOOL (300)
+    STRING (301) 28
+    UMINUS (302)
+    UPLUS (303)
+    LOWER_THEN_ELSE (304)
+
+
+非终结语词，附有它们出现处的规则
+
+    $accept (50)
+        on left: 0
+    program (51)
+        on left: 1
+        on right: 0
+    statements (52)
+        on left: 2 3
+        on right: 1 3 13
+    statement (53)
+        on left: 4 5 6 7 8 9 10 11 12 13 14 15
+        on right: 2 3 7 8 9 16 17
+    forstmt (54)
+        on left: 16 17
+        on right: 10
+    exprstmt (55)
+        on left: 18
+        on right: 14
+    lb (56)
+        on left: 19
+        on right: 13 15
+    rb (57)
+        on left: 20
+        on right: 13 15
+    declaration (58)
+        on left: 21 22
+        on right: 5
+    idlist (59)
+        on left: 23 24
+        on right: 22 23
+    expr (60)
+        on left: 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43
+        on right: 6 7 8 9 11 18 21 29 30 31 32 33 36 37 38 39 40 41 42 43 44 45 46 47
+    boolexpr (61)
+        on left: 44 45 46
+        on right: 34
+    exprassign (62)
+        on left: 47
+        on right: 16 35
+    T (63)
+        on left: 48 49 50 51
+        on right: 1 21 22
+
+
+状态 0
+
+    0 $accept: . program $end
+
+    T_CHAR  偏移，并进入状态 1
+    T_INT   偏移，并进入状态 2
+    T_BOOL  偏移，并进入状态 3
+    T_VOID  偏移，并进入状态 4
+
+    program  转到状态 5
+    T        转到状态 6
+
+
+状态 1
+
+   49 T: T_CHAR .
+
+    $default  使用规则 49 以归约 (T)
+
+
+状态 2
+
+   48 T: T_INT .
+
+    $default  使用规则 48 以归约 (T)
+
+
+状态 3
+
+   50 T: T_BOOL .
+
+    $default  使用规则 50 以归约 (T)
+
+
+状态 4
+
+   51 T: T_VOID .
+
+    $default  使用规则 51 以归约 (T)
+
+
+状态 5
+
+    0 $accept: program . $end
+
+    $end  偏移，并进入状态 7
+
+
+状态 6
+
+    1 program: T . ID LPAREN RPAREN statements
+
+    ID  偏移，并进入状态 8
+
+
+状态 7
+
+    0 $accept: program $end .
+
+    $default  接受
+
+
+状态 8
+
+    1 program: T ID . LPAREN RPAREN statements
+
+    LPAREN  偏移，并进入状态 9
+
+
+状态 9
+
+    1 program: T ID LPAREN . RPAREN statements
+
+    RPAREN  偏移，并进入状态 10
+
+
+状态 10
+
+    1 program: T ID LPAREN RPAREN . statements
+
+    T_CHAR   偏移，并进入状态 1
+    T_INT    偏移，并进入状态 2
+    T_BOOL   偏移，并进入状态 3
+    T_VOID   偏移，并进入状态 4
+    RETURN   偏移，并进入状态 11
+    IF       偏移，并进入状态 12
+    WHILE    偏移，并进入状态 13
+    FOR      偏移，并进入状态 14
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    SEMI     偏移，并进入状态 17
+    NOT      偏移，并进入状态 18
+    LBRACE   偏移，并进入状态 19
+    PRINTF   偏移，并进入状态 20
+    SCANF    偏移，并进入状态 21
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    statements   转到状态 26
+    statement    转到状态 27
+    forstmt      转到状态 28
+    exprstmt     转到状态 29
+    lb           转到状态 30
+    declaration  转到状态 31
+    expr         转到状态 32
+    boolexpr     转到状态 33
+    exprassign   转到状态 34
+    T            转到状态 35
+
+
+状态 11
+
+    6 statement: RETURN . expr SEMI
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 36
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 12
+
+    7 statement: IF . LPAREN expr RPAREN statement ELSE statement
+    8          | IF . LPAREN expr RPAREN statement
+
+    LPAREN  偏移，并进入状态 37
+
+
+状态 13
+
+    9 statement: WHILE . LPAREN expr RPAREN statement
+
+    LPAREN  偏移，并进入状态 38
+
+
+状态 14
+
+   16 forstmt: FOR . LPAREN statement statement exprassign RPAREN statement
+   17        | FOR . LPAREN statement statement RPAREN statement
+
+    LPAREN  偏移，并进入状态 39
+
+
+状态 15
+
+   37 expr: PLUS . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 40
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 16
+
+   36 expr: MINUS . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 41
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 17
+
+    4 statement: SEMI .
+
+    $default  使用规则 4 以归约 (statement)
+
+
+状态 18
+
+   46 boolexpr: NOT . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 42
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 19
+
+   19 lb: LBRACE .
+
+    $default  使用规则 19 以归约 (lb)
+
+
+状态 20
+
+   11 statement: PRINTF . LPAREN expr RPAREN SEMI
+
+    LPAREN  偏移，并进入状态 43
+
+
+状态 21
+
+   12 statement: SCANF . LPAREN ID RPAREN SEMI
+
+    LPAREN  偏移，并进入状态 44
+
+
+状态 22
+
+   25 expr: ID .
+   47 exprassign: ID . ASSIGN expr
+
+    ASSIGN  偏移，并进入状态 45
+
+    $default  使用规则 25 以归约 (expr)
+
+
+状态 23
+
+   26 expr: INTEGER .
+
+    $default  使用规则 26 以归约 (expr)
+
+
+状态 24
+
+   27 expr: CHAR .
+
+    $default  使用规则 27 以归约 (expr)
+
+
+状态 25
+
+   28 expr: STRING .
+
+    $default  使用规则 28 以归约 (expr)
+
+
+状态 26
+
+    1 program: T ID LPAREN RPAREN statements .
+    3 statements: statements . statement
+
+    T_CHAR   偏移，并进入状态 1
+    T_INT    偏移，并进入状态 2
+    T_BOOL   偏移，并进入状态 3
+    T_VOID   偏移，并进入状态 4
+    RETURN   偏移，并进入状态 11
+    IF       偏移，并进入状态 12
+    WHILE    偏移，并进入状态 13
+    FOR      偏移，并进入状态 14
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    SEMI     偏移，并进入状态 17
+    NOT      偏移，并进入状态 18
+    LBRACE   偏移，并进入状态 19
+    PRINTF   偏移，并进入状态 20
+    SCANF    偏移，并进入状态 21
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    $default  使用规则 1 以归约 (program)
+
+    statement    转到状态 46
+    forstmt      转到状态 28
+    exprstmt     转到状态 29
+    lb           转到状态 30
+    declaration  转到状态 31
+    expr         转到状态 32
+    boolexpr     转到状态 33
+    exprassign   转到状态 34
+    T            转到状态 35
+
+
+状态 27
+
+    2 statements: statement .
+
+    $default  使用规则 2 以归约 (statements)
+
+
+状态 28
+
+   10 statement: forstmt .
+
+    $default  使用规则 10 以归约 (statement)
+
+
+状态 29
+
+   14 statement: exprstmt .
+
+    $default  使用规则 14 以归约 (statement)
+
+
+状态 30
+
+   13 statement: lb . statements rb
+   15          | lb . rb
+
+    T_CHAR   偏移，并进入状态 1
+    T_INT    偏移，并进入状态 2
+    T_BOOL   偏移，并进入状态 3
+    T_VOID   偏移，并进入状态 4
+    RETURN   偏移，并进入状态 11
+    IF       偏移，并进入状态 12
+    WHILE    偏移，并进入状态 13
+    FOR      偏移，并进入状态 14
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    SEMI     偏移，并进入状态 17
+    NOT      偏移，并进入状态 18
+    LBRACE   偏移，并进入状态 19
+    RBRACE   偏移，并进入状态 47
+    PRINTF   偏移，并进入状态 20
+    SCANF    偏移，并进入状态 21
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    statements   转到状态 48
+    statement    转到状态 27
+    forstmt      转到状态 28
+    exprstmt     转到状态 29
+    lb           转到状态 30
+    rb           转到状态 49
+    declaration  转到状态 31
+    expr         转到状态 32
+    boolexpr     转到状态 33
+    exprassign   转到状态 34
+    T            转到状态 35
+
+
+状态 31
+
+    5 statement: declaration . SEMI
+
+    SEMI  偏移，并进入状态 50
+
+
+状态 32
+
+   18 exprstmt: expr . SEMI
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    PLUS    偏移，并进入状态 51
+    MINUS   偏移，并进入状态 52
+    SEMI    偏移，并进入状态 53
+    LOEOP   偏移，并进入状态 54
+    GOEOP   偏移，并进入状态 55
+    GREOP   偏移，并进入状态 56
+    LESSOP  偏移，并进入状态 57
+    EQOP    偏移，并进入状态 58
+    NEQOP   偏移，并进入状态 59
+    MUL     偏移，并进入状态 60
+    DIV     偏移，并进入状态 61
+    MOD     偏移，并进入状态 62
+    AND     偏移，并进入状态 63
+    OR      偏移，并进入状态 64
+
+
+状态 33
+
+   34 expr: boolexpr .
+
+    $default  使用规则 34 以归约 (expr)
+
+
+状态 34
+
+   35 expr: exprassign .
+
+    $default  使用规则 35 以归约 (expr)
+
+
+状态 35
+
+   21 declaration: T . ID ASSIGN expr
+   22            | T . idlist
+
+    ID  偏移，并进入状态 65
+
+    idlist  转到状态 66
+
+
+状态 36
+
+    6 statement: RETURN expr . SEMI
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    PLUS    偏移，并进入状态 51
+    MINUS   偏移，并进入状态 52
+    SEMI    偏移，并进入状态 67
+    LOEOP   偏移，并进入状态 54
+    GOEOP   偏移，并进入状态 55
+    GREOP   偏移，并进入状态 56
+    LESSOP  偏移，并进入状态 57
+    EQOP    偏移，并进入状态 58
+    NEQOP   偏移，并进入状态 59
+    MUL     偏移，并进入状态 60
+    DIV     偏移，并进入状态 61
+    MOD     偏移，并进入状态 62
+    AND     偏移，并进入状态 63
+    OR      偏移，并进入状态 64
+
+
+状态 37
+
+    7 statement: IF LPAREN . expr RPAREN statement ELSE statement
+    8          | IF LPAREN . expr RPAREN statement
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 68
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 38
+
+    9 statement: WHILE LPAREN . expr RPAREN statement
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 69
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 39
+
+   16 forstmt: FOR LPAREN . statement statement exprassign RPAREN statement
+   17        | FOR LPAREN . statement statement RPAREN statement
+
+    T_CHAR   偏移，并进入状态 1
+    T_INT    偏移，并进入状态 2
+    T_BOOL   偏移，并进入状态 3
+    T_VOID   偏移，并进入状态 4
+    RETURN   偏移，并进入状态 11
+    IF       偏移，并进入状态 12
+    WHILE    偏移，并进入状态 13
+    FOR      偏移，并进入状态 14
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    SEMI     偏移，并进入状态 17
+    NOT      偏移，并进入状态 18
+    LBRACE   偏移，并进入状态 19
+    PRINTF   偏移，并进入状态 20
+    SCANF    偏移，并进入状态 21
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    statement    转到状态 70
+    forstmt      转到状态 28
+    exprstmt     转到状态 29
+    lb           转到状态 30
+    declaration  转到状态 31
+    expr         转到状态 32
+    boolexpr     转到状态 33
+    exprassign   转到状态 34
+    T            转到状态 35
+
+
+状态 40
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   37     | PLUS expr .
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    $default  使用规则 37 以归约 (expr)
+
+
+状态 41
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   36     | MINUS expr .
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    $default  使用规则 36 以归约 (expr)
+
+
+状态 42
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+   46         | NOT expr .
+
+    $default  使用规则 46 以归约 (boolexpr)
+
+
+状态 43
+
+   11 statement: PRINTF LPAREN . expr RPAREN SEMI
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 71
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 44
+
+   12 statement: SCANF LPAREN . ID RPAREN SEMI
+
+    ID  偏移，并进入状态 72
+
+
+状态 45
+
+   47 exprassign: ID ASSIGN . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 73
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 46
+
+    3 statements: statements statement .
+
+    $default  使用规则 3 以归约 (statements)
+
+
+状态 47
+
+   20 rb: RBRACE .
+
+    $default  使用规则 20 以归约 (rb)
+
+
+状态 48
+
+    3 statements: statements . statement
+   13 statement: lb statements . rb
+
+    T_CHAR   偏移，并进入状态 1
+    T_INT    偏移，并进入状态 2
+    T_BOOL   偏移，并进入状态 3
+    T_VOID   偏移，并进入状态 4
+    RETURN   偏移，并进入状态 11
+    IF       偏移，并进入状态 12
+    WHILE    偏移，并进入状态 13
+    FOR      偏移，并进入状态 14
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    SEMI     偏移，并进入状态 17
+    NOT      偏移，并进入状态 18
+    LBRACE   偏移，并进入状态 19
+    RBRACE   偏移，并进入状态 47
+    PRINTF   偏移，并进入状态 20
+    SCANF    偏移，并进入状态 21
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    statement    转到状态 46
+    forstmt      转到状态 28
+    exprstmt     转到状态 29
+    lb           转到状态 30
+    rb           转到状态 74
+    declaration  转到状态 31
+    expr         转到状态 32
+    boolexpr     转到状态 33
+    exprassign   转到状态 34
+    T            转到状态 35
+
+
+状态 49
+
+   15 statement: lb rb .
+
+    $default  使用规则 15 以归约 (statement)
+
+
+状态 50
+
+    5 statement: declaration SEMI .
+
+    $default  使用规则 5 以归约 (statement)
+
+
+状态 51
+
+   29 expr: expr PLUS . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 75
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 52
+
+   30 expr: expr MINUS . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 76
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 53
+
+   18 exprstmt: expr SEMI .
+
+    $default  使用规则 18 以归约 (exprstmt)
+
+
+状态 54
+
+   38 expr: expr LOEOP . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 77
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 55
+
+   39 expr: expr GOEOP . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 78
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 56
+
+   41 expr: expr GREOP . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 79
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 57
+
+   40 expr: expr LESSOP . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 80
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 58
+
+   42 expr: expr EQOP . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 81
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 59
+
+   43 expr: expr NEQOP . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 82
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 60
+
+   31 expr: expr MUL . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 83
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 61
+
+   32 expr: expr DIV . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 84
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 62
+
+   33 expr: expr MOD . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 85
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 63
+
+   44 boolexpr: expr AND . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 86
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 64
+
+   45 boolexpr: expr OR . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 87
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 65
+
+   21 declaration: T ID . ASSIGN expr
+   24 idlist: ID .
+
+    ASSIGN  偏移，并进入状态 88
+
+    $default  使用规则 24 以归约 (idlist)
+
+
+状态 66
+
+   22 declaration: T idlist .
+   23 idlist: idlist . COMMA ID
+
+    COMMA  偏移，并进入状态 89
+
+    $default  使用规则 22 以归约 (declaration)
+
+
+状态 67
+
+    6 statement: RETURN expr SEMI .
+
+    $default  使用规则 6 以归约 (statement)
+
+
+状态 68
+
+    7 statement: IF LPAREN expr . RPAREN statement ELSE statement
+    8          | IF LPAREN expr . RPAREN statement
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    PLUS    偏移，并进入状态 51
+    MINUS   偏移，并进入状态 52
+    LOEOP   偏移，并进入状态 54
+    GOEOP   偏移，并进入状态 55
+    GREOP   偏移，并进入状态 56
+    LESSOP  偏移，并进入状态 57
+    EQOP    偏移，并进入状态 58
+    NEQOP   偏移，并进入状态 59
+    MUL     偏移，并进入状态 60
+    DIV     偏移，并进入状态 61
+    MOD     偏移，并进入状态 62
+    AND     偏移，并进入状态 63
+    OR      偏移，并进入状态 64
+    RPAREN  偏移，并进入状态 90
+
+
+状态 69
+
+    9 statement: WHILE LPAREN expr . RPAREN statement
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    PLUS    偏移，并进入状态 51
+    MINUS   偏移，并进入状态 52
+    LOEOP   偏移，并进入状态 54
+    GOEOP   偏移，并进入状态 55
+    GREOP   偏移，并进入状态 56
+    LESSOP  偏移，并进入状态 57
+    EQOP    偏移，并进入状态 58
+    NEQOP   偏移，并进入状态 59
+    MUL     偏移，并进入状态 60
+    DIV     偏移，并进入状态 61
+    MOD     偏移，并进入状态 62
+    AND     偏移，并进入状态 63
+    OR      偏移，并进入状态 64
+    RPAREN  偏移，并进入状态 91
+
+
+状态 70
+
+   16 forstmt: FOR LPAREN statement . statement exprassign RPAREN statement
+   17        | FOR LPAREN statement . statement RPAREN statement
+
+    T_CHAR   偏移，并进入状态 1
+    T_INT    偏移，并进入状态 2
+    T_BOOL   偏移，并进入状态 3
+    T_VOID   偏移，并进入状态 4
+    RETURN   偏移，并进入状态 11
+    IF       偏移，并进入状态 12
+    WHILE    偏移，并进入状态 13
+    FOR      偏移，并进入状态 14
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    SEMI     偏移，并进入状态 17
+    NOT      偏移，并进入状态 18
+    LBRACE   偏移，并进入状态 19
+    PRINTF   偏移，并进入状态 20
+    SCANF    偏移，并进入状态 21
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    statement    转到状态 92
+    forstmt      转到状态 28
+    exprstmt     转到状态 29
+    lb           转到状态 30
+    declaration  转到状态 31
+    expr         转到状态 32
+    boolexpr     转到状态 33
+    exprassign   转到状态 34
+    T            转到状态 35
+
+
+状态 71
+
+   11 statement: PRINTF LPAREN expr . RPAREN SEMI
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    PLUS    偏移，并进入状态 51
+    MINUS   偏移，并进入状态 52
+    LOEOP   偏移，并进入状态 54
+    GOEOP   偏移，并进入状态 55
+    GREOP   偏移，并进入状态 56
+    LESSOP  偏移，并进入状态 57
+    EQOP    偏移，并进入状态 58
+    NEQOP   偏移，并进入状态 59
+    MUL     偏移，并进入状态 60
+    DIV     偏移，并进入状态 61
+    MOD     偏移，并进入状态 62
+    AND     偏移，并进入状态 63
+    OR      偏移，并进入状态 64
+    RPAREN  偏移，并进入状态 93
+
+
+状态 72
+
+   12 statement: SCANF LPAREN ID . RPAREN SEMI
+
+    RPAREN  偏移，并进入状态 94
+
+
+状态 73
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+   47 exprassign: ID ASSIGN expr .
+
+    PLUS    偏移，并进入状态 51
+    MINUS   偏移，并进入状态 52
+    LOEOP   偏移，并进入状态 54
+    GOEOP   偏移，并进入状态 55
+    GREOP   偏移，并进入状态 56
+    LESSOP  偏移，并进入状态 57
+    EQOP    偏移，并进入状态 58
+    NEQOP   偏移，并进入状态 59
+    MUL     偏移，并进入状态 60
+    DIV     偏移，并进入状态 61
+    MOD     偏移，并进入状态 62
+    AND     偏移，并进入状态 63
+    OR      偏移，并进入状态 64
+
+    $default  使用规则 47 以归约 (exprassign)
+
+
+状态 74
+
+   13 statement: lb statements rb .
+
+    $default  使用规则 13 以归约 (statement)
+
+
+状态 75
+
+   29 expr: expr . PLUS expr
+   29     | expr PLUS expr .
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    MUL  偏移，并进入状态 60
+    DIV  偏移，并进入状态 61
+    MOD  偏移，并进入状态 62
+
+    $default  使用规则 29 以归约 (expr)
+
+
+状态 76
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   30     | expr MINUS expr .
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    MUL  偏移，并进入状态 60
+    DIV  偏移，并进入状态 61
+    MOD  偏移，并进入状态 62
+
+    $default  使用规则 30 以归约 (expr)
+
+
+状态 77
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   38     | expr LOEOP expr .
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    PLUS   偏移，并进入状态 51
+    MINUS  偏移，并进入状态 52
+    MUL    偏移，并进入状态 60
+    DIV    偏移，并进入状态 61
+    MOD    偏移，并进入状态 62
+
+    $default  使用规则 38 以归约 (expr)
+
+
+状态 78
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   39     | expr GOEOP expr .
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    PLUS   偏移，并进入状态 51
+    MINUS  偏移，并进入状态 52
+    MUL    偏移，并进入状态 60
+    DIV    偏移，并进入状态 61
+    MOD    偏移，并进入状态 62
+
+    $default  使用规则 39 以归约 (expr)
+
+
+状态 79
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   41     | expr GREOP expr .
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    PLUS   偏移，并进入状态 51
+    MINUS  偏移，并进入状态 52
+    MUL    偏移，并进入状态 60
+    DIV    偏移，并进入状态 61
+    MOD    偏移，并进入状态 62
+
+    $default  使用规则 41 以归约 (expr)
+
+
+状态 80
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   40     | expr LESSOP expr .
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    PLUS   偏移，并进入状态 51
+    MINUS  偏移，并进入状态 52
+    MUL    偏移，并进入状态 60
+    DIV    偏移，并进入状态 61
+    MOD    偏移，并进入状态 62
+
+    $default  使用规则 40 以归约 (expr)
+
+
+状态 81
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   42     | expr EQOP expr .
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    PLUS   偏移，并进入状态 51
+    MINUS  偏移，并进入状态 52
+    MUL    偏移，并进入状态 60
+    DIV    偏移，并进入状态 61
+    MOD    偏移，并进入状态 62
+
+    $default  使用规则 42 以归约 (expr)
+
+
+状态 82
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   43     | expr NEQOP expr .
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    PLUS   偏移，并进入状态 51
+    MINUS  偏移，并进入状态 52
+    MUL    偏移，并进入状态 60
+    DIV    偏移，并进入状态 61
+    MOD    偏移，并进入状态 62
+
+    $default  使用规则 43 以归约 (expr)
+
+
+状态 83
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   31     | expr MUL expr .
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    $default  使用规则 31 以归约 (expr)
+
+
+状态 84
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   32     | expr DIV expr .
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    $default  使用规则 32 以归约 (expr)
+
+
+状态 85
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   33     | expr MOD expr .
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    $default  使用规则 33 以归约 (expr)
+
+
+状态 86
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   44         | expr AND expr .
+   45         | expr . OR expr
+
+    PLUS    偏移，并进入状态 51
+    MINUS   偏移，并进入状态 52
+    LOEOP   偏移，并进入状态 54
+    GOEOP   偏移，并进入状态 55
+    GREOP   偏移，并进入状态 56
+    LESSOP  偏移，并进入状态 57
+    EQOP    偏移，并进入状态 58
+    NEQOP   偏移，并进入状态 59
+    MUL     偏移，并进入状态 60
+    DIV     偏移，并进入状态 61
+    MOD     偏移，并进入状态 62
+
+    $default  使用规则 44 以归约 (boolexpr)
+
+
+状态 87
+
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+   45         | expr OR expr .
+
+    PLUS    偏移，并进入状态 51
+    MINUS   偏移，并进入状态 52
+    LOEOP   偏移，并进入状态 54
+    GOEOP   偏移，并进入状态 55
+    GREOP   偏移，并进入状态 56
+    LESSOP  偏移，并进入状态 57
+    EQOP    偏移，并进入状态 58
+    NEQOP   偏移，并进入状态 59
+    MUL     偏移，并进入状态 60
+    DIV     偏移，并进入状态 61
+    MOD     偏移，并进入状态 62
+    AND     偏移，并进入状态 63
+
+    $default  使用规则 45 以归约 (boolexpr)
+
+
+状态 88
+
+   21 declaration: T ID ASSIGN . expr
+
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    NOT      偏移，并进入状态 18
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    expr        转到状态 95
+    boolexpr    转到状态 33
+    exprassign  转到状态 34
+
+
+状态 89
+
+   23 idlist: idlist COMMA . ID
+
+    ID  偏移，并进入状态 96
+
+
+状态 90
+
+    7 statement: IF LPAREN expr RPAREN . statement ELSE statement
+    8          | IF LPAREN expr RPAREN . statement
+
+    T_CHAR   偏移，并进入状态 1
+    T_INT    偏移，并进入状态 2
+    T_BOOL   偏移，并进入状态 3
+    T_VOID   偏移，并进入状态 4
+    RETURN   偏移，并进入状态 11
+    IF       偏移，并进入状态 12
+    WHILE    偏移，并进入状态 13
+    FOR      偏移，并进入状态 14
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    SEMI     偏移，并进入状态 17
+    NOT      偏移，并进入状态 18
+    LBRACE   偏移，并进入状态 19
+    PRINTF   偏移，并进入状态 20
+    SCANF    偏移，并进入状态 21
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    statement    转到状态 97
+    forstmt      转到状态 28
+    exprstmt     转到状态 29
+    lb           转到状态 30
+    declaration  转到状态 31
+    expr         转到状态 32
+    boolexpr     转到状态 33
+    exprassign   转到状态 34
+    T            转到状态 35
+
+
+状态 91
+
+    9 statement: WHILE LPAREN expr RPAREN . statement
+
+    T_CHAR   偏移，并进入状态 1
+    T_INT    偏移，并进入状态 2
+    T_BOOL   偏移，并进入状态 3
+    T_VOID   偏移，并进入状态 4
+    RETURN   偏移，并进入状态 11
+    IF       偏移，并进入状态 12
+    WHILE    偏移，并进入状态 13
+    FOR      偏移，并进入状态 14
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    SEMI     偏移，并进入状态 17
+    NOT      偏移，并进入状态 18
+    LBRACE   偏移，并进入状态 19
+    PRINTF   偏移，并进入状态 20
+    SCANF    偏移，并进入状态 21
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    statement    转到状态 98
+    forstmt      转到状态 28
+    exprstmt     转到状态 29
+    lb           转到状态 30
+    declaration  转到状态 31
+    expr         转到状态 32
+    boolexpr     转到状态 33
+    exprassign   转到状态 34
+    T            转到状态 35
+
+
+状态 92
+
+   16 forstmt: FOR LPAREN statement statement . exprassign RPAREN statement
+   17        | FOR LPAREN statement statement . RPAREN statement
+
+    RPAREN  偏移，并进入状态 99
+    ID      偏移，并进入状态 100
+
+    exprassign  转到状态 101
+
+
+状态 93
+
+   11 statement: PRINTF LPAREN expr RPAREN . SEMI
+
+    SEMI  偏移，并进入状态 102
+
+
+状态 94
+
+   12 statement: SCANF LPAREN ID RPAREN . SEMI
+
+    SEMI  偏移，并进入状态 103
+
+
+状态 95
+
+   21 declaration: T ID ASSIGN expr .
+   29 expr: expr . PLUS expr
+   30     | expr . MINUS expr
+   31     | expr . MUL expr
+   32     | expr . DIV expr
+   33     | expr . MOD expr
+   38     | expr . LOEOP expr
+   39     | expr . GOEOP expr
+   40     | expr . LESSOP expr
+   41     | expr . GREOP expr
+   42     | expr . EQOP expr
+   43     | expr . NEQOP expr
+   44 boolexpr: expr . AND expr
+   45         | expr . OR expr
+
+    PLUS    偏移，并进入状态 51
+    MINUS   偏移，并进入状态 52
+    LOEOP   偏移，并进入状态 54
+    GOEOP   偏移，并进入状态 55
+    GREOP   偏移，并进入状态 56
+    LESSOP  偏移，并进入状态 57
+    EQOP    偏移，并进入状态 58
+    NEQOP   偏移，并进入状态 59
+    MUL     偏移，并进入状态 60
+    DIV     偏移，并进入状态 61
+    MOD     偏移，并进入状态 62
+    AND     偏移，并进入状态 63
+    OR      偏移，并进入状态 64
+
+    $default  使用规则 21 以归约 (declaration)
+
+
+状态 96
+
+   23 idlist: idlist COMMA ID .
+
+    $default  使用规则 23 以归约 (idlist)
+
+
+状态 97
+
+    7 statement: IF LPAREN expr RPAREN statement . ELSE statement
+    8          | IF LPAREN expr RPAREN statement .
+
+    ELSE  偏移，并进入状态 104
+
+    $default  使用规则 8 以归约 (statement)
+
+
+状态 98
+
+    9 statement: WHILE LPAREN expr RPAREN statement .
+
+    $default  使用规则 9 以归约 (statement)
+
+
+状态 99
+
+   17 forstmt: FOR LPAREN statement statement RPAREN . statement
+
+    T_CHAR   偏移，并进入状态 1
+    T_INT    偏移，并进入状态 2
+    T_BOOL   偏移，并进入状态 3
+    T_VOID   偏移，并进入状态 4
+    RETURN   偏移，并进入状态 11
+    IF       偏移，并进入状态 12
+    WHILE    偏移，并进入状态 13
+    FOR      偏移，并进入状态 14
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    SEMI     偏移，并进入状态 17
+    NOT      偏移，并进入状态 18
+    LBRACE   偏移，并进入状态 19
+    PRINTF   偏移，并进入状态 20
+    SCANF    偏移，并进入状态 21
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    statement    转到状态 105
+    forstmt      转到状态 28
+    exprstmt     转到状态 29
+    lb           转到状态 30
+    declaration  转到状态 31
+    expr         转到状态 32
+    boolexpr     转到状态 33
+    exprassign   转到状态 34
+    T            转到状态 35
+
+
+状态 100
+
+   47 exprassign: ID . ASSIGN expr
+
+    ASSIGN  偏移，并进入状态 45
+
+
+状态 101
+
+   16 forstmt: FOR LPAREN statement statement exprassign . RPAREN statement
+
+    RPAREN  偏移，并进入状态 106
+
+
+状态 102
+
+   11 statement: PRINTF LPAREN expr RPAREN SEMI .
+
+    $default  使用规则 11 以归约 (statement)
+
+
+状态 103
+
+   12 statement: SCANF LPAREN ID RPAREN SEMI .
+
+    $default  使用规则 12 以归约 (statement)
+
+
+状态 104
+
+    7 statement: IF LPAREN expr RPAREN statement ELSE . statement
+
+    T_CHAR   偏移，并进入状态 1
+    T_INT    偏移，并进入状态 2
+    T_BOOL   偏移，并进入状态 3
+    T_VOID   偏移，并进入状态 4
+    RETURN   偏移，并进入状态 11
+    IF       偏移，并进入状态 12
+    WHILE    偏移，并进入状态 13
+    FOR      偏移，并进入状态 14
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    SEMI     偏移，并进入状态 17
+    NOT      偏移，并进入状态 18
+    LBRACE   偏移，并进入状态 19
+    PRINTF   偏移，并进入状态 20
+    SCANF    偏移，并进入状态 21
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    statement    转到状态 107
+    forstmt      转到状态 28
+    exprstmt     转到状态 29
+    lb           转到状态 30
+    declaration  转到状态 31
+    expr         转到状态 32
+    boolexpr     转到状态 33
+    exprassign   转到状态 34
+    T            转到状态 35
+
+
+状态 105
+
+   17 forstmt: FOR LPAREN statement statement RPAREN statement .
+
+    $default  使用规则 17 以归约 (forstmt)
+
+
+状态 106
+
+   16 forstmt: FOR LPAREN statement statement exprassign RPAREN . statement
+
+    T_CHAR   偏移，并进入状态 1
+    T_INT    偏移，并进入状态 2
+    T_BOOL   偏移，并进入状态 3
+    T_VOID   偏移，并进入状态 4
+    RETURN   偏移，并进入状态 11
+    IF       偏移，并进入状态 12
+    WHILE    偏移，并进入状态 13
+    FOR      偏移，并进入状态 14
+    PLUS     偏移，并进入状态 15
+    MINUS    偏移，并进入状态 16
+    SEMI     偏移，并进入状态 17
+    NOT      偏移，并进入状态 18
+    LBRACE   偏移，并进入状态 19
+    PRINTF   偏移，并进入状态 20
+    SCANF    偏移，并进入状态 21
+    ID       偏移，并进入状态 22
+    INTEGER  偏移，并进入状态 23
+    CHAR     偏移，并进入状态 24
+    STRING   偏移，并进入状态 25
+
+    statement    转到状态 108
+    forstmt      转到状态 28
+    exprstmt     转到状态 29
+    lb           转到状态 30
+    declaration  转到状态 31
+    expr         转到状态 32
+    boolexpr     转到状态 33
+    exprassign   转到状态 34
+    T            转到状态 35
+
+
+状态 107
+
+    7 statement: IF LPAREN expr RPAREN statement ELSE statement .
+
+    $default  使用规则 7 以归约 (statement)
+
+
+状态 108
+
+   16 forstmt: FOR LPAREN statement statement exprassign RPAREN statement .
+
+    $default  使用规则 16 以归约 (forstmt)

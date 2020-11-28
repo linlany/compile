@@ -6,7 +6,7 @@
     int yylex();
     int yyerror( char const * );
 %}
-%token T_CHAR T_INT T_STRING T_BOOL 
+%token T_CHAR T_INT T_STRING T_BOOL T_VOID
 %token RETURN IF ELSE WHILE FOR
 %token PLUASS MINASS MULASS DIVASS PLUS MINUS
 %token SEMI COMMA
@@ -25,12 +25,12 @@
 %left MUL DIV MOD
 %right NOT
 %right UMINUS UPLUS
-
-
+%nonassoc LOWER_THEN_ELSE
+%nonassoc ELSE 
 %%
 
 program
-: T_INT ID LPAREN RPAREN statements {root = new TreeNode(0, NODE_PROG); root->addChild($1);};
+:T ID LPAREN RPAREN statements {root = new TreeNode(0, NODE_PROG); root->addChild($1);root->addChild($2);root->addChild($5);};
 
 statements
 :  statement {$$=$1;}
@@ -38,17 +38,26 @@ statements
 ;
 
 statement
-: SEMI  {$$ = new TreeNode(lineno, NODE_STMT); $$->stype = STMT_SKIP;}
+: SEMI  {$$ = new TreeNode(lineno, NODE_STMT); $$->stype = STMT_SKIP;$$->stmt_val="";}
 | declaration SEMI {$$ = $1;}
 | RETURN expr SEMI {$$ = $1;$$->addChild($2);}
 | IF LPAREN expr RPAREN statement ELSE statement {$$ = $1;$$->addChild($3);$$->addChild($5);$$->addChild($6);$6->addChild($7);}
-| IF LPAREN expr RPAREN statement {$$ = $1;$$->addChild($3);$$->addChild($5);}
+| IF LPAREN expr RPAREN statement %prec LOWER_THEN_ELSE {$$ = $1;$$->addChild($3);$$->addChild($5);}
 | WHILE LPAREN expr RPAREN statement {$$ = $1;$$->addChild($3);$$->addChild($5);}
-| FOR LPAREN statement SEMI expr SEMI statement SEMI RPAREN statement {$$=$1;$$->addChild($3);addChild($5);addChild($7);addChild($10);}
-| expr SEMI {TreeNode* node = new TreeNode($1->lineno, NODE_STMT);node->stype = STMT_EXPR;node->addChild($1);$$=node;}
-| PRINTF LPAREN STRING RPAREN SEMI {$$=$1;$$->addChild($3);}
+| forstmt {$$=$1;}
+| PRINTF LPAREN expr RPAREN SEMI {$$=$1;$$->addChild($3);}
 | SCANF LPAREN ID RPAREN SEMI {$$=$1;$$->addChild($3);}
 | lb statements rb {$$=$2;}
+| exprstmt {$$=$1;}
+| lb rb {$$ = new TreeNode(lineno, NODE_STMT); $$->stype = STMT_SKIP;$$->stmt_val="  ";}
+;
+forstmt
+: FOR LPAREN statement statement exprassign RPAREN statement {$$=$1;$$->addChild($3);$$->addChild($4);$$->addChild($5);$$->addChild($7);}
+| FOR LPAREN statement statement RPAREN statement {$$=$1;$$->addChild($3);$$->addChild($4);TreeNode* node = new TreeNode(lineno, NODE_STMT);node->stype = STMT_SKIP;node->stmt_val="";$$->addChild(node);$$->addChild($6);}
+;
+
+exprstmt
+: expr SEMI {$$=$1;}
 ;
 lb
 : LBRACE
@@ -60,20 +69,25 @@ declaration
 : T ID ASSIGN expr{  // declare and init
     TreeNode* node = new TreeNode($1->lineno, NODE_STMT);
     node->stype = STMT_DECL;
+    node->stmt_val="decl";
     node->addChild($1);
     node->addChild($2);
     node->addChild($4);
     $$ = node;   
 } 
-| T ID {
+| T idlist {
     TreeNode* node = new TreeNode($1->lineno, NODE_STMT);
     node->stype = STMT_DECL;
+    node->stmt_val="decl";
     node->addChild($1);
     node->addChild($2);
     $$ = node;   
 }
 ;
-
+idlist
+: idlist COMMA ID {$$=$1;$$->addSibling($3);}
+| ID {$$=$1;}
+;
 expr
 : ID {
     $$ = $1;
@@ -92,10 +106,8 @@ expr
 | expr MUL expr {$$=$2;$$->addChild($1);$$->addChild($3);}
 | expr DIV expr {$$=$2;$$->addChild($1);$$->addChild($3);}
 | expr MOD expr {$$=$2;$$->addChild($1);$$->addChild($3);}
-| expr AND expr {$$=$2;$$->addChild($1);$$->addChild($3);}
-| expr OR expr {$$=$2;$$->addChild($1);$$->addChild($3);}
-| NOT expr {$$=$1;$$->addChild($2);}
-| ID ASSIGN expr {$$=$2;$$->addChild($1);$$->addChild($3);}
+| boolexpr {$$=$1;}
+| exprassign {$$=$1;}
 | MINUS expr %prec UMINUS {$$=$1;$$->addChild($2);}
 | PLUS expr %prec UPLUS {$$=$1;$$->addChild($2);}
 | expr LOEOP expr {$$=$2;$$->addChild($1);$$->addChild($3);}
@@ -105,10 +117,19 @@ expr
 | expr EQOP expr {$$=$2;$$->addChild($1);$$->addChild($3);}
 | expr NEQOP expr {$$=$2;$$->addChild($1);$$->addChild($3);}
 ;
+boolexpr
+: expr AND expr {$$=$2;$$->addChild($1);$$->addChild($3);}
+| expr OR expr {$$=$2;$$->addChild($1);$$->addChild($3);}
+| NOT expr {$$=$1;$$->addChild($2);}
+;
+exprassign
+: ID ASSIGN expr {$$=$2;$$->addChild($1);$$->addChild($3);}
+;
 
 T: T_INT {$$ = new TreeNode(lineno, NODE_TYPE); $$->type = TYPE_INT;} 
 | T_CHAR {$$ = new TreeNode(lineno, NODE_TYPE); $$->type = TYPE_CHAR;}
 | T_BOOL {$$ = new TreeNode(lineno, NODE_TYPE); $$->type = TYPE_BOOL;}
+| T_VOID {$$ = new TreeNode(lineno, NODE_TYPE); $$->type = TYPE_VOID;}
 ;
 
 %%

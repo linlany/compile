@@ -9,6 +9,8 @@ int lineno=1;
 EOL	(\r\n|\r|\n)
 CHAR \'.?\'
 STRING \".+\"
+PRINTF printf
+SCANF scanf
 
 RETURN return
 IF if
@@ -55,8 +57,7 @@ sincombegin \/\/
 sincomele .
 sincomend \n
 
-PRINTF printf
-SCANF scanf
+
 AERROR .
 %x COMMENT
 %x SINCOMMENT
@@ -66,7 +67,7 @@ AERROR .
 "int" return T_INT;
 "bool" return T_BOOL;
 "char" return T_CHAR;
-
+"void" return T_VOID;
 
 
 
@@ -88,28 +89,41 @@ AERROR .
     return CHAR;
 }
 
-
+{PRINTF} {
+	TreeNode* node = new TreeNode(lineno, NODE_STMT);
+	node->stype = STMT_PRINTF;
+	node->stmt_val="printf";
+	yylval = node;
+	return PRINTF;
+}
+{SCANF} {
+	TreeNode* node = new TreeNode(lineno, NODE_STMT);
+	node->stype = STMT_SCANF;
+	node->stmt_val="scanf";
+	yylval = node;
+	return SCANF;
+}
 
 {RETURN} {
 	TreeNode* node = new TreeNode(lineno, NODE_STMT);
 	node->stype = STMT_RETURN;
 	node->stmt_val="return";
 	yylval = node;
-	return RETURN；
+	return RETURN;
 }
 {IF} {
 	TreeNode* node = new TreeNode(lineno, NODE_STMT);
 	node->stype = STMT_IF;
 	node->stmt_val="if";
 	yylval = node;
-	return IF；
+	return IF;
 }
 {ELSE} {
 	TreeNode* node = new TreeNode(lineno, NODE_STMT);
 	node->stype = STMT_ELSE;
 	node->stmt_val="else";
 	yylval = node;
-	return ELSE；
+	return ELSE;
 
 }
 {WHILE} {
@@ -117,7 +131,7 @@ AERROR .
 	node->stype = STMT_WHILE;
 	node->stmt_val="while";
 	yylval = node;
-	return WHILE；
+	return WHILE;
 
 }
 {FOR} {
@@ -125,46 +139,46 @@ AERROR .
 	node->stype = STMT_FOR;
 	node->stmt_val="for";
 	yylval = node;
-	return FOR；
+	return FOR;
 
 }
 {PLUASS} {
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_PLU_ASS;
 	yylval = node;
-	return PLUASS；
+	return PLUASS;
 
 }
 {MINASS} {
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_MIN_ASS;
 	yylval = node;
-	return MINASS；
+	return MINASS;
 
 }
 {MULASS} {	
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_MUL_ASS;
 	yylval = node;
-	return MULASS；
+	return MULASS;
 	}
 {DIVASS} {
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_DIV_ASS;
 	yylval = node;
-	return DIVASS；
+	return DIVASS;
 }
 {PLUS} {
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_PLUSS;
 	yylval = node;
-	return PLUS；
+	return PLUS;
 }
 {MINUS} {
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_MINUS;
 	yylval = node;
-	return MINUS；
+	return MINUS;
 }
 {INTEGER} {
     TreeNode* node = new TreeNode(lineno, NODE_CONST);
@@ -190,77 +204,77 @@ AERROR .
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_ASSIGN;
 	yylval = node;
-	return ASSIGN；
+	return ASSIGN;
 }
 {LOEOP} {	
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_LOE;
 	yylval = node;
-	return LOEOP；
+	return LOEOP;
 }
 {GOEOP} {	
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_GOE;
 	yylval = node;
-	return GOEOP；
+	return GOEOP;
 }
 {GREOP} {	
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_GRE;
 	yylval = node;
-	return GREOP；
+	return GREOP;
 }
 {LESSOP} {	
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_LESS;
 	yylval = node;
-	return LESSOP；
+	return LESSOP;
 }
 {EQOP} {	
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_EQ;
 	yylval = node;
-	return EQOP；
+	return EQOP;
 }
 {NEQOP} {	
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_NEQ;
 	yylval = node;
-	return NEQOP；
+	return NEQOP;
 }
 {MUL} {
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_MUL;
 	yylval = node;
-	return MUL；
+	return MUL;
 
 }
 {DIV} {
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_DIV;
 	yylval = node;
-	return DIV；
+	return DIV;
 
 }
 {MOD} {
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_MOD;
 	yylval = node;
-	return MOD；
+	return MOD;
 
 }
 {AND} {
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_AND;
 	yylval = node;
-	return AND；
+	return AND;
 
 }
 {OR} {
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_OR;
 	yylval = node;
-	return OR；
+	return OR;
 
 }
 
@@ -269,7 +283,7 @@ AERROR .
 	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
 	node->optype = OP_NOT;
 	yylval = node;
-	return NOT；
+	return NOT;
 
 }
 {LPAREN} {return LPAREN;}
@@ -278,20 +292,7 @@ AERROR .
 {RBRACK} {return RBRACK;}
 {LBRACE} {return LBRACE;}
 {RBRACE} {return RBRACE;}
-{PRINTF} {
-	TreeNode* node = new TreeNode(lineno, NODE_STMT);
-	node->stype = STMT_PRINTF;
-	node->stmt_val="printf";
-	yylval = node;
-	return PRINTF；
-}
-{SCANF} {
-	TreeNode* node = new TreeNode(lineno, NODE_STMT);
-	node->stype = STMT_SCANF;
-	node->stmt_val="scanf";
-	yylval = node;
-	return SCANF；
-}
+
 {commentbegin} {BEGIN COMMENT;}
 <COMMENT>{commentelement} {}
 <COMMENT>{commentend} {BEGIN INITIAL;}

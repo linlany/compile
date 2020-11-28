@@ -70,7 +70,7 @@ public:
     void printAST(); // 先输出自己 + 孩子们的id；再依次让每个孩子输出AST。
     void printSpecialInfo();
 
-    void genNodeId();
+    void genNodeId(int &n);
 
 public:
     OperatorType optype;  // 如果是表达式
@@ -86,6 +86,7 @@ public:
     static string nodeType2String (NodeType type);
     static string opType2String (OperatorType type);
     static string sType2String (StmtType type);
+    static string optype2String(OperatorType type);
 
 public:
     TreeNode(int lineno, NodeType type);

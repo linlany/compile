@@ -1,46 +1,76 @@
-lno@0	@0	program	children: [@1 @3 @6 @8 @14 @18 @22 @26 @44 	]
-lno@1	@1	statement	children: [@2 	] stmt: printf
-lno@1	@2	const type: string
-lno@2	@3	statement	children: [@4 @5 	] stmt: decl
-lno@2	@4	type type: int
-lno@2	@5	variable varname: n
-lno@3	@6	statement	children: [@7 	] stmt: scanf
-lno@3	@7	variable varname: n
-lno@4	@8	statement	children: [@9 @12 	] stmt: if
-lno@4	@9	expression	children: [@10 @11 	]
-lno@4	@10	variable varname: n
-lno@4	@11	const type: int
-lno@5	@12	statement	children: [@13 	] stmt: printf
-lno@5	@13	const type: string
-lno@7	@14	statement	children: [@15 @16 @17 	] stmt: decl
-lno@7	@15	type type: int
-lno@7	@16	variable varname: a
-lno@7	@17	const type: int
-lno@8	@18	statement	children: [@19 @20 @21 	] stmt: decl
-lno@8	@19	type type: int
-lno@8	@20	variable varname: b
-lno@8	@21	const type: int
-lno@9	@22	statement	children: [@23 @24 @25 	] stmt: decl
-lno@9	@23	type type: int
-lno@9	@24	variable varname: c
-lno@9	@25	const type: int
-lno@10	@26	statement	children: [@27 @30 @33 @36 @40 	] stmt: while
-lno@10	@27	expression	children: [@28 @29 	]
-lno@10	@28	variable varname: n
-lno@10	@29	const type: int
-lno@11	@30	statement	children: [@31 @32 	] stmt: assign
-lno@11	@31	variable varname: a
-lno@11	@32	variable varname: b
-lno@12	@33	statement	children: [@34 @35 	] stmt: assign
-lno@12	@34	variable varname: b
-lno@12	@35	variable varname: c
-lno@13	@36	statement	children: [@37 @38 @39 	] stmt: assign
-lno@13	@37	variable varname: c
-lno@13	@38	variable varname: a
-lno@13	@39	variable varname: b
-lno@14	@40	statement	children: [@41 @42 @43 	] stmt: assign
-lno@14	@41	variable varname: n
-lno@14	@42	variable varname: n
-lno@14	@43	const type: int
-lno@16	@44	statement	children: [@45 	] stmt: printf
-lno@16	@45	const type: string
+line:  0	nodeid: 0	program	child:[ 1  2  3  7  10  13  16  18  ]
+line:  1	nodeid: 1	type  type:VOID	
+line:  1	nodeid: 2	variable  name: main	
+line:  2	nodeid: 3	statement  stmtType: DECL	child:[ 4  5  6  ]
+line:  2	nodeid: 4	type  type:int	
+line:  2	nodeid: 5	variable  name: a	
+line:  2	nodeid: 6	variable  name: s	
+line:  3	nodeid: 7	expression  opType: OP_ASSIGN	child:[ 8  9  ]
+line:  3	nodeid: 8	variable  name: a	
+line:  3	nodeid: 9	CONST  Type: int	
+line:  4	nodeid: 10	expression  opType: OP_ASSIGN	child:[ 11  12  ]
+line:  4	nodeid: 11	variable  name: s	
+line:  4	nodeid: 12	CONST  Type: int	
+line:  5	nodeid: 13	statement  stmtType: DECL	child:[ 14  15  ]
+line:  5	nodeid: 14	type  type:char	
+line:  5	nodeid: 15	variable  name: ch	
+line:  6	nodeid: 16	statement  stmtType: SCANF	child:[ 17  ]
+line:  6	nodeid: 17	variable  name: ch	
+line:  7	nodeid: 18	statement  stmtType: WHILE	child:[ 19  37  40  43  ]
+line:  7	nodeid: 19	expression  opType: OP_OR	child:[ 20  27  ]
+line:  7	nodeid: 20	expression  opType: OP_AND	child:[ 21  24  ]
+line:  7	nodeid: 21	expression  opType: OP_GRE	child:[ 22  23  ]
+line:  7	nodeid: 22	variable  name: a	
+line:  7	nodeid: 23	CONST  Type: int	
+line:  7	nodeid: 24	expression  opType: OP_LOE	child:[ 25  26  ]
+line:  7	nodeid: 25	variable  name: a	
+line:  7	nodeid: 26	CONST  Type: int	
+line:  7	nodeid: 27	expression  opType: OP_AND	child:[ 28  33  ]
+line:  7	nodeid: 28	expression  opType: OP_EQ	child:[ 29  32  ]
+line:  7	nodeid: 29	expression  opType: OP_MOD	child:[ 30  31  ]
+line:  7	nodeid: 30	variable  name: a	
+line:  7	nodeid: 31	CONST  Type: int	
+line:  7	nodeid: 32	CONST  Type: int	
+line:  7	nodeid: 33	expression  opType: OP_EQ	child:[ 34  36  ]
+line:  7	nodeid: 34	expression  opType: OP_NOT	child:[ 35  ]
+line:  7	nodeid: 35	variable  name: a	
+line:  7	nodeid: 36	CONST  Type: int	
+line:  8	nodeid: 37	statement  stmtType: DECL	child:[ 38  39  ]
+line:  8	nodeid: 38	type  type:int	
+line:  8	nodeid: 39	variable  name: a	
+line:  9	nodeid: 40	expression  opType: OP_ASSIGN	child:[ 41  42  ]
+line:  9	nodeid: 41	variable  name: a	
+line:  9	nodeid: 42	CONST  Type: int	
+line:  10	nodeid: 43	statement  stmtType: IF	child:[ 44  49  51  53  56  59  ]
+line:  10	nodeid: 44	expression  opType: OP_LESS	child:[ 45  47  ]
+line:  10	nodeid: 45	expression  opType: OP_MINUS	child:[ 46  ]
+line:  10	nodeid: 46	variable  name: s	
+line:  10	nodeid: 47	expression  opType: OP_MINUS	child:[ 48  ]
+line:  10	nodeid: 48	CONST  Type: int	
+line:  11	nodeid: 49	statement  stmtType: PRINTF	child:[ 50  ]
+line:  11	nodeid: 50	CONST  Type: string	
+line:  12	nodeid: 51	statement  stmtType: PRINTF	child:[ 52  ]
+line:  12	nodeid: 52	variable  name: s	
+line:  13	nodeid: 53	statement  stmtType: DECL	child:[ 54  55  ]
+line:  13	nodeid: 54	type  type:int	
+line:  13	nodeid: 55	variable  name: b	
+line:  14	nodeid: 56	expression  opType: OP_ASSIGN	child:[ 57  58  ]
+line:  14	nodeid: 57	variable  name: b	
+line:  14	nodeid: 58	CONST  Type: int	
+line:  15	nodeid: 59	statement  stmtType: FOR	child:[ 60  64  67  72  74  ]
+line:  15	nodeid: 60	statement  stmtType: DECL	child:[ 61  62  63  ]
+line:  15	nodeid: 61	type  type:int	
+line:  15	nodeid: 62	variable  name: i	
+line:  15	nodeid: 63	CONST  Type: int	
+line:  15	nodeid: 64	expression  opType: OP_LESS	child:[ 65  66  ]
+line:  15	nodeid: 65	variable  name: i	
+line:  15	nodeid: 66	variable  name: b	
+line:  15	nodeid: 67	expression  opType: OP_ASSIGN	child:[ 68  69  ]
+line:  15	nodeid: 68	variable  name: i	
+line:  15	nodeid: 69	expression  opType: OP_PLUSS	child:[ 70  71  ]
+line:  15	nodeid: 70	variable  name: i	
+line:  15	nodeid: 71	CONST  Type: int	
+line:  16	nodeid: 72	statement  stmtType: PRINTF	child:[ 73  ]
+line:  16	nodeid: 73	CONST  Type: string	
+line:  17	nodeid: 74	statement  stmtType: PRINTF	child:[ 75  ]
+line:  17	nodeid: 75	variable  name: i	
