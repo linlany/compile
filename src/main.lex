@@ -187,9 +187,8 @@ AERROR .
 }
 {COMMA} {return COMMA;}
 {ASSIGN} {
-	TreeNode* node = new TreeNode(lineno, NODE_STMT);
-	node->stype = STMT_ASSIGN;
-	node->stmt_val="=";
+	TreeNode* node = new TreeNode(lineno, NODE_EXPR);
+	node->optype = OP_ASSIGN;
 	yylval = node;
 	return ASSIGN；
 }

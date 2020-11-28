@@ -35,18 +35,18 @@ enum OperatorType
     OP_OR,
     OP_NOT,
     OP_MOD,
+    OP_ASSIGN,
 };
 
 enum StmtType {
     STMT_SKIP,
     STMT_DECL,
-    STMT_CONDI,
     STMT_IF,
     STMT_ELSE,
     STMT_WHILE,
     STMT_RETURN,
     STMT_FOR,
-    STMT_ASSIGN,
+    STMT_EXPR,
     STMT_PRINTF,
     STMT_SCANF,
 }
