@@ -52,10 +52,13 @@ statement
 | lb rb {$$ = new TreeNode(lineno, NODE_STMT); $$->stype = STMT_SKIP;$$->stmt_val="  ";}
 ;
 forstmt
-: FOR LPAREN statement statement exprassign RPAREN statement {$$=$1;$$->addChild($3);$$->addChild($4);$$->addChild($5);$$->addChild($7);}
-| FOR LPAREN statement statement RPAREN statement {$$=$1;$$->addChild($3);$$->addChild($4);TreeNode* node = new TreeNode(lineno, NODE_STMT);node->stype = STMT_SKIP;node->stmt_val="";$$->addChild(node);$$->addChild($6);}
+: FOR LPAREN statement boolstmt exprassign RPAREN statement {$$=$1;$$->addChild($3);$$->addChild($4);$$->addChild($5);$$->addChild($7);}
+| FOR LPAREN statement boolstmt RPAREN statement {$$=$1;$$->addChild($3);$$->addChild($4);TreeNode* node = new TreeNode(lineno, NODE_STMT);node->stype = STMT_SKIP;node->stmt_val="";$$->addChild(node);$$->addChild($6);}
 ;
-
+boolstmt
+: boolexpr SEMI{$$=$1;}
+| SEMI {$$ = new TreeNode(lineno, NODE_STMT); $$->stype = STMT_SKIP;$$->stmt_val="";}
+;
 exprstmt
 : expr SEMI {$$=$1;}
 ;
@@ -110,17 +113,17 @@ expr
 | exprassign {$$=$1;}
 | MINUS expr %prec UMINUS {$$=$1;$$->addChild($2);}
 | PLUS expr %prec UPLUS {$$=$1;$$->addChild($2);}
+;
+boolexpr
+: expr AND expr {$$=$2;$$->addChild($1);$$->addChild($3);}
+| expr OR expr {$$=$2;$$->addChild($1);$$->addChild($3);}
+| NOT expr {$$=$1;$$->addChild($2);}
 | expr LOEOP expr {$$=$2;$$->addChild($1);$$->addChild($3);}
 | expr GOEOP expr {$$=$2;$$->addChild($1);$$->addChild($3);}
 | expr LESSOP expr {$$=$2;$$->addChild($1);$$->addChild($3);}
 | expr GREOP expr {$$=$2;$$->addChild($1);$$->addChild($3);}
 | expr EQOP expr {$$=$2;$$->addChild($1);$$->addChild($3);}
 | expr NEQOP expr {$$=$2;$$->addChild($1);$$->addChild($3);}
-;
-boolexpr
-: expr AND expr {$$=$2;$$->addChild($1);$$->addChild($3);}
-| expr OR expr {$$=$2;$$->addChild($1);$$->addChild($3);}
-| NOT expr {$$=$1;$$->addChild($2);}
 ;
 exprassign
 : ID ASSIGN expr {$$=$2;$$->addChild($1);$$->addChild($3);}

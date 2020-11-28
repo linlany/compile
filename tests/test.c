@@ -12,7 +12,7 @@ printf("result is: ");
 printf(s);
 int b;
 b = 10;
-for(int i=0;i<b;i=i+1) {
+for(int i=0;;i=i+1) {
 printf("have fun:");
 printf(i);
 }

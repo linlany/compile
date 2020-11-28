@@ -57,20 +57,18 @@ line:  13	nodeid: 55	variable  name: b
 line:  14	nodeid: 56	expression  opType: OP_ASSIGN	child:[ 57  58  ]
 line:  14	nodeid: 57	variable  name: b	
 line:  14	nodeid: 58	CONST  Type: int	
-line:  15	nodeid: 59	statement  stmtType: FOR	child:[ 60  64  67  72  74  ]
+line:  15	nodeid: 59	statement  stmtType: FOR	child:[ 60  64  65  70  72  ]
 line:  15	nodeid: 60	statement  stmtType: DECL	child:[ 61  62  63  ]
 line:  15	nodeid: 61	type  type:int	
 line:  15	nodeid: 62	variable  name: i	
 line:  15	nodeid: 63	CONST  Type: int	
-line:  15	nodeid: 64	expression  opType: OP_LESS	child:[ 65  66  ]
-line:  15	nodeid: 65	variable  name: i	
-line:  15	nodeid: 66	variable  name: b	
-line:  15	nodeid: 67	expression  opType: OP_ASSIGN	child:[ 68  69  ]
+line:  15	nodeid: 64	statement  stmtType: SKIP	
+line:  15	nodeid: 65	expression  opType: OP_ASSIGN	child:[ 66  67  ]
+line:  15	nodeid: 66	variable  name: i	
+line:  15	nodeid: 67	expression  opType: OP_PLUSS	child:[ 68  69  ]
 line:  15	nodeid: 68	variable  name: i	
-line:  15	nodeid: 69	expression  opType: OP_PLUSS	child:[ 70  71  ]
-line:  15	nodeid: 70	variable  name: i	
-line:  15	nodeid: 71	CONST  Type: int	
-line:  16	nodeid: 72	statement  stmtType: PRINTF	child:[ 73  ]
-line:  16	nodeid: 73	CONST  Type: string	
-line:  17	nodeid: 74	statement  stmtType: PRINTF	child:[ 75  ]
-line:  17	nodeid: 75	variable  name: i	
+line:  15	nodeid: 69	CONST  Type: int	
+line:  16	nodeid: 70	statement  stmtType: PRINTF	child:[ 71  ]
+line:  16	nodeid: 71	CONST  Type: string	
+line:  17	nodeid: 72	statement  stmtType: PRINTF	child:[ 73  ]
+line:  17	nodeid: 73	variable  name: i	
