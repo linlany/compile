@@ -1,91 +1,92 @@
-line:  0	nodeid: 0	program	child:[ 1  2  3  7  11  14  17  21  23  ]
+line:  0	nodeid: 0	program	child:[ 1  2  3  7  11  14  17  21  23  91  ]
 line:  2	nodeid: 1	type  type:VOID	
-line:  2	nodeid: 2	variable  name: main	index: 0	scope: 0x55d4cc967180	
+line:  2	nodeid: 2	variable  name: main	index: 0	scope: 0x5652d5586180	
 line:  3	nodeid: 3	statement  stmtType: DECL	child:[ 4  5  6  ]
 line:  3	nodeid: 4	type  type:int	
-line:  3	nodeid: 5	variable  name: a	index: 0	scope: 0x55d4cc96cdc0	
-line:  3	nodeid: 6	variable  name: s	index: 1	scope: 0x55d4cc96cdc0	
+line:  3	nodeid: 5	variable  name: a	index: 0	scope: 0x5652d558bdc0	
+line:  3	nodeid: 6	variable  name: s	index: 1	scope: 0x5652d558bdc0	
 line:  4	nodeid: 7	statement  stmtType: DECL	child:[ 8  9  10  ]
 line:  4	nodeid: 8	type  type:bool	
-line:  4	nodeid: 9	variable  name: test	index: 2	scope: 0x55d4cc96cdc0	
+line:  4	nodeid: 9	variable  name: test	index: 2	scope: 0x5652d558bdc0	
 line:  4	nodeid: 10	CONST  Type: bool	value: 0	
 line:  5	nodeid: 11	expression  opType: OP_ASSIGN	child:[ 12  13  ]
-line:  5	nodeid: 12	variable  name: a	index: 0	scope: 0x55d4cc96cdc0	
+line:  5	nodeid: 12	variable  name: a	index: 0	scope: 0x5652d558bdc0	
 line:  5	nodeid: 13	CONST  Type: int	value: 10	
 line:  6	nodeid: 14	expression  opType: OP_ASSIGN	child:[ 15  16  ]
-line:  6	nodeid: 15	variable  name: s	index: 1	scope: 0x55d4cc96cdc0	
+line:  6	nodeid: 15	variable  name: s	index: 1	scope: 0x5652d558bdc0	
 line:  6	nodeid: 16	CONST  Type: int	value: 0	
 line:  7	nodeid: 17	statement  stmtType: DECL	child:[ 18  19  20  ]
 line:  7	nodeid: 18	type  type:char	
-line:  7	nodeid: 19	variable  name: ch	index: 3	scope: 0x55d4cc96cdc0	
+line:  7	nodeid: 19	variable  name: ch	index: 3	scope: 0x5652d558bdc0	
 line:  7	nodeid: 20	CONST  Type: char	value: 'a'	
 line:  8	nodeid: 21	statement  stmtType: SCANF	child:[ 22  ]
-line:  8	nodeid: 22	variable  name: ch	index: 3	scope: 0x55d4cc96cdc0	
+line:  8	nodeid: 22	variable  name: ch	index: 3	scope: 0x5652d558bdc0	
 line:  9	nodeid: 23	statement  stmtType: WHILE	child:[ 24  42  47  50  53  58  ]
 line:  9	nodeid: 24	expression  opType: OP_OR	child:[ 25  32  ]
 line:  9	nodeid: 25	expression  opType: OP_AND	child:[ 26  29  ]
 line:  9	nodeid: 26	expression  opType: OP_GRE	child:[ 27  28  ]
-line:  9	nodeid: 27	variable  name: a	index: 0	scope: 0x55d4cc96cdc0	
+line:  9	nodeid: 27	variable  name: a	index: 0	scope: 0x5652d558bdc0	
 line:  9	nodeid: 28	CONST  Type: int	value: 0	
 line:  9	nodeid: 29	expression  opType: OP_LOE	child:[ 30  31  ]
-line:  9	nodeid: 30	variable  name: a	index: 0	scope: 0x55d4cc96cdc0	
+line:  9	nodeid: 30	variable  name: a	index: 0	scope: 0x5652d558bdc0	
 line:  9	nodeid: 31	CONST  Type: int	value: 10	
 line:  9	nodeid: 32	expression  opType: OP_AND	child:[ 33  38  ]
 line:  9	nodeid: 33	expression  opType: OP_EQ	child:[ 34  37  ]
 line:  9	nodeid: 34	expression  opType: OP_MOD	child:[ 35  36  ]
-line:  9	nodeid: 35	variable  name: a	index: 0	scope: 0x55d4cc96cdc0	
+line:  9	nodeid: 35	variable  name: a	index: 0	scope: 0x5652d558bdc0	
 line:  9	nodeid: 36	CONST  Type: int	value: 100	
 line:  9	nodeid: 37	CONST  Type: int	value: 10	
 line:  9	nodeid: 38	expression  opType: OP_EQ	child:[ 39  41  ]
 line:  9	nodeid: 39	expression  opType: OP_NOT	child:[ 40  ]
-line:  9	nodeid: 40	variable  name: a	index: 0	scope: 0x55d4cc96cdc0	
+line:  9	nodeid: 40	variable  name: a	index: 0	scope: 0x5652d558bdc0	
 line:  9	nodeid: 41	CONST  Type: int	value: 10	
 line:  10	nodeid: 42	expression  opType: OP_ASSIGN	child:[ 43  44  ]
-line:  10	nodeid: 43	variable  name: a	index: 0	scope: 0x55d4cc96cdc0	
+line:  10	nodeid: 43	variable  name: a	index: 0	scope: 0x5652d558bdc0	
 line:  10	nodeid: 44	expression  opType: OP_MINUS	child:[ 45  46  ]
-line:  10	nodeid: 45	variable  name: a	index: 0	scope: 0x55d4cc96cdc0	
+line:  10	nodeid: 45	variable  name: a	index: 0	scope: 0x5652d558bdc0	
 line:  10	nodeid: 46	CONST  Type: int	value: 1	
 line:  11	nodeid: 47	statement  stmtType: DECL	child:[ 48  49  ]
 line:  11	nodeid: 48	type  type:int	
-line:  11	nodeid: 49	variable  name: a	index: 0	scope: 0x55d4cc96f310	
+line:  11	nodeid: 49	variable  name: a	index: 0	scope: 0x5652d558e310	
 line:  12	nodeid: 50	expression  opType: OP_ASSIGN	child:[ 51  52  ]
-line:  12	nodeid: 51	variable  name: a	index: 0	scope: 0x55d4cc96f310	
+line:  12	nodeid: 51	variable  name: a	index: 0	scope: 0x5652d558e310	
 line:  12	nodeid: 52	CONST  Type: int	value: 10	
 line:  13	nodeid: 53	expression  opType: OP_ASSIGN	child:[ 54  55  ]
-line:  13	nodeid: 54	variable  name: s	index: 1	scope: 0x55d4cc96cdc0	
+line:  13	nodeid: 54	variable  name: s	index: 1	scope: 0x5652d558bdc0	
 line:  13	nodeid: 55	expression  opType: OP_PLUSS	child:[ 56  57  ]
-line:  13	nodeid: 56	variable  name: s	index: 1	scope: 0x55d4cc96cdc0	
-line:  13	nodeid: 57	variable  name: a	index: 0	scope: 0x55d4cc96f310	
+line:  13	nodeid: 56	variable  name: s	index: 1	scope: 0x5652d558bdc0	
+line:  13	nodeid: 57	variable  name: a	index: 0	scope: 0x5652d558e310	
 line:  14	nodeid: 58	statement  stmtType: IF	child:[ 59  64  66  68  71  74  ]
 line:  14	nodeid: 59	expression  opType: OP_LESS	child:[ 60  62  ]
 line:  14	nodeid: 60	expression  opType: OP_MINUS	child:[ 61  ]
-line:  14	nodeid: 61	variable  name: s	index: 1	scope: 0x55d4cc96cdc0	
+line:  14	nodeid: 61	variable  name: s	index: 1	scope: 0x5652d558bdc0	
 line:  14	nodeid: 62	expression  opType: OP_MINUS	child:[ 63  ]
 line:  14	nodeid: 63	CONST  Type: int	value: 10	
 line:  15	nodeid: 64	statement  stmtType: PRINTF	child:[ 65  ]
 line:  15	nodeid: 65	CONST  Type: string	value: "result is: "	
 line:  16	nodeid: 66	statement  stmtType: PRINTF	child:[ 67  ]
-line:  16	nodeid: 67	variable  name: s	index: 1	scope: 0x55d4cc96cdc0	
+line:  16	nodeid: 67	variable  name: s	index: 1	scope: 0x5652d558bdc0	
 line:  17	nodeid: 68	statement  stmtType: DECL	child:[ 69  70  ]
 line:  17	nodeid: 69	type  type:int	
-line:  17	nodeid: 70	variable  name: b	index: 0	scope: 0x55d4cc970a20	
+line:  17	nodeid: 70	variable  name: b	index: 0	scope: 0x5652d558fa20	
 line:  18	nodeid: 71	expression  opType: OP_ASSIGN	child:[ 72  73  ]
-line:  18	nodeid: 72	variable  name: b	index: 0	scope: 0x55d4cc970a20	
+line:  18	nodeid: 72	variable  name: b	index: 0	scope: 0x5652d558fa20	
 line:  18	nodeid: 73	CONST  Type: int	value: 10	
 line:  19	nodeid: 74	statement  stmtType: FOR	child:[ 75  79  82  87  89  ]
 line:  19	nodeid: 75	statement  stmtType: DECL	child:[ 76  77  78  ]
 line:  19	nodeid: 76	type  type:int	
-line:  19	nodeid: 77	variable  name: i	index: 1	scope: 0x55d4cc970a20	
+line:  19	nodeid: 77	variable  name: i	index: 1	scope: 0x5652d558fa20	
 line:  19	nodeid: 78	CONST  Type: int	value: 0	
 line:  19	nodeid: 79	expression  opType: OP_LESS	child:[ 80  81  ]
-line:  19	nodeid: 80	variable  name: i	index: 1	scope: 0x55d4cc970a20	
-line:  19	nodeid: 81	variable  name: b	index: 0	scope: 0x55d4cc970a20	
+line:  19	nodeid: 80	variable  name: i	index: 1	scope: 0x5652d558fa20	
+line:  19	nodeid: 81	variable  name: b	index: 0	scope: 0x5652d558fa20	
 line:  19	nodeid: 82	expression  opType: OP_ASSIGN	child:[ 83  84  ]
-line:  19	nodeid: 83	variable  name: i	index: 1	scope: 0x55d4cc970a20	
+line:  19	nodeid: 83	variable  name: i	index: 1	scope: 0x5652d558fa20	
 line:  19	nodeid: 84	expression  opType: OP_PLUSS	child:[ 85  86  ]
-line:  19	nodeid: 85	variable  name: i	index: 1	scope: 0x55d4cc970a20	
+line:  19	nodeid: 85	variable  name: i	index: 1	scope: 0x5652d558fa20	
 line:  19	nodeid: 86	CONST  Type: int	value: 1	
 line:  20	nodeid: 87	statement  stmtType: PRINTF	child:[ 88  ]
 line:  20	nodeid: 88	CONST  Type: string	value: "have fun:"	
 line:  21	nodeid: 89	statement  stmtType: PRINTF	child:[ 90  ]
-line:  21	nodeid: 90	variable  name: i	index: 1	scope: 0x55d4cc970a20	
+line:  21	nodeid: 90	variable  name: i	index: 1	scope: 0x5652d558fa20	
+line:  25	nodeid: 91	statement  stmtType: RETURN	

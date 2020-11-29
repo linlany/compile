@@ -24,5 +24,6 @@ void main(){
 			}
 		}
 	}
+	return ;
 }
 // No more compilation error.

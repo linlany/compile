@@ -42,6 +42,7 @@ statement
 : SEMI  {$$ = new TreeNode(lineno, NODE_STMT); $$->stype = STMT_SKIP;$$->stmt_val="";}
 | declaration SEMI {$$ = $1;}
 | RETURN expr SEMI {$$ = $1;$$->addChild($2);}
+| RETURN SEMI {$$ = $1;}
 | IF LPAREN expr RPAREN statement ELSE statement {$$ = $1;$$->addChild($3);$$->addChild($5);$$->addChild($6);$6->addChild($7);}
 | IF LPAREN expr RPAREN statement %prec LOWER_THEN_ELSE {$$ = $1;$$->addChild($3);$$->addChild($5);}
 | WHILE LPAREN expr RPAREN statement {$$ = $1;$$->addChild($3);$$->addChild($5);}
