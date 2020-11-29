@@ -11,7 +11,8 @@ CHAR \'.?\'
 STRING \".+\"
 PRINTF printf
 SCANF scanf
-
+B_TRUE true
+B_FALSE false
 RETURN return
 IF if
 ELSE else
@@ -69,7 +70,20 @@ AERROR .
 "char" return T_CHAR;
 "void" return T_VOID;
 
-
+{B_TRUE} {
+	TreeNode* node = new TreeNode(lineno, NODE_CONST);
+	node->type = TYPE_BOOL;
+	node->b_val = 1;
+	yylval = node;
+	return BOOL;
+}
+{B_FALSE} {
+	TreeNode* node = new TreeNode(lineno, NODE_CONST);
+	node->type = TYPE_BOOL;
+	node->b_val = 0;
+	yylval = node;
+	return BOOL;
+}
 
 {STRING} {
 	TreeNode* node = new TreeNode(lineno, NODE_CONST);
@@ -84,7 +98,7 @@ AERROR .
 {CHAR} {
     TreeNode* node = new TreeNode(lineno, NODE_CONST);
     node->type = TYPE_CHAR;
-    node->int_val = yytext[1];
+    node->ch_val = yytext[1];
     yylval = node;
     return CHAR;
 }

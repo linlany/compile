@@ -71,9 +71,24 @@ void TreeNode::printSpecialInfo() {
     switch(this->nodeType){
         case NODE_CONST:
             cout<<"CONST  "<<"Type: "<<this->type->getTypeInfo()<<'\t';
+            switch(this->type->type){
+                case VALUE_INT:
+                    cout<<"value: "<<this->int_val<<'\t';
+                    break;
+                case VALUE_CHAR:
+                    cout<<"value: \'"<<this->ch_val<<'\''<<'\t';
+                    break;
+                case VALUE_STRING:
+                    cout<<"value: "<<'"'<<this->str_val<<'"'<<'\t';
+                    break;
+                case VALUE_BOOL:
+                    cout<<"value: "<<this->b_val<<'\t';
+                default:
+                    break;
+            }
             break;
         case NODE_VAR:
-            cout<<"variable  "<<"name: "<<this->var_name<<'\t';
+            cout<<"variable  "<<"name: "<<this->var_name<<"\tindex: "<<this->val_scope_index<<"\tscope: "<<val_scope<<'\t';
             break;
         case NODE_EXPR:
             cout<<"expression  "<<"opType: "<<this->optype2String(this->optype)<<'\t';

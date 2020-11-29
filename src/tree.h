@@ -3,6 +3,33 @@
 
 #include "pch.h"
 #include "type.h"
+class SymbolTable{
+public:
+	string sy[50];
+	SymbolTable * pre=nullptr;
+	vector<SymbolTable*> child;
+	SymbolTable(SymbolTable* p=NULL){
+		pre=p;
+	}
+	int find(string s){
+		for(int i=0;i<50;i++){
+			if(s==sy[i]){
+				return i;
+			}
+		}
+		
+		return -1;
+	}
+	int insert(string s){
+		for(int i=0;i<50;i++){
+			if(sy[i].empty()){
+				sy[i]=s;
+				return i;
+			}
+		}
+		return -1;
+	}
+};
 
 enum NodeType
 {
@@ -10,7 +37,6 @@ enum NodeType
     NODE_VAR,
     NODE_EXPR,
     NODE_TYPE,
-
     NODE_STMT,
     NODE_PROG,
 };
@@ -82,6 +108,8 @@ public:
     string str_val;
     string var_name;
     string stmt_val;
+    SymbolTable* val_scope=nullptr;
+    int val_scope_index;
 public:
     static string nodeType2String (NodeType type);
     static string opType2String (OperatorType type);
