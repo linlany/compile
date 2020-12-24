@@ -74,7 +74,7 @@ statement
 		$3->val_scope_index=n;
 	}
 	}
-| lb statements rb {$$=$2;}
+| lb statements rb {$$ = new TreeNode(lineno, NODE_STMT);$$->addChild($2);$$->stype = STMT_LIST;}
 | exprstmt {$$=$1;}
 | lb rb {$$ = new TreeNode(lineno, NODE_STMT); $$->stype = STMT_SKIP;$$->stmt_val="  ";}
 ;

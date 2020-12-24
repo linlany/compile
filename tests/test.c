@@ -1,13 +1,14 @@
 /*
 I'm level 1 test.
 */
-void main(){
+void main(){{
 	int a, s;
 	bool test=false;
 	a = 10;
 	s = 0;
 	char ch='a';
 	scanf(ch);
+	}
 	while(a>0 && a<=10 || a%100==10 && !a==10) {
 		a=a-1;
 		int a;
@@ -22,6 +23,8 @@ void main(){
 				printf("have fun:");
 				printf(i);
 			}
+		}
+		else{
 		}
 	}
 	return ;

@@ -1562,7 +1562,7 @@ yyreduce:
 
   case 15:
 #line 77 "src/main.y"
-                   {yyval=yyvsp[-1];}
+                   {yyval = new TreeNode(lineno, NODE_STMT);yyval->addChild(yyvsp[-1]);yyval->stype = STMT_LIST;}
 #line 1567 "src/main.tab.cpp"
     break;
 

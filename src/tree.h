@@ -75,6 +75,7 @@ enum StmtType {
     STMT_EXPR,
     STMT_PRINTF,
     STMT_SCANF,
+    STMT_LIST,
 }
 ;
 

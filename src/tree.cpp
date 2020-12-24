@@ -129,6 +129,8 @@ string TreeNode::sType2String(StmtType type) {
 			return "PRINTF";
 		case STMT_SCANF:
 			return "SCANF";
+		case STMT_LIST:
+			return "LIST";
 		default:
 			return "error";
 			break;
